@@ -39,7 +39,7 @@ request(url, (error, response, body) => {
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
   console.log('body:', body); // Print the HTML for the homepage that the USER INPUTS!
 
-
+  console.log(`Downloaded and saved "file size placeholder" to ${filePath}`);
 
 });
 
