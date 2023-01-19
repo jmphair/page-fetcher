@@ -1,7 +1,7 @@
 /** 
  * It should take two command line arguments: which means I need to use process.argv again...
- * a URL
- * a local file path
+ * a URL done ✅
+ * a local file path done ✅
  * 
  * Think of this user input from the command line as an array: 
  * node fetcher.js http://www.example.edu/ ./index.html
@@ -20,7 +20,7 @@
  * Use Node's fs (file system) module to write the file DONE ✅
  * Use the callback based approach we've been learning so far 
  * Do not use the pipe function
- * Do not use synchronous functions (see warning above)
+ * Do not use synchronous functions 
 */
 
 //proof of concept that it's an array
@@ -29,7 +29,7 @@
 
 const url = process.argv[2];
 const filePath = process.argv[3];
-// const fs = require('fs');
+const fs = require('fs');
 const request = require('request');
 
 
@@ -39,7 +39,16 @@ request(url, (error, response, body) => {
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
   console.log('body:', body); // Print the HTML for the homepage that the USER INPUTS!
 
-  console.log(`Downloaded and saved "file size placeholder" to ${filePath}`);
+  //ok right out of the node website
+  fs.writeFile(filePath, body, (err) => {
+    if (err) {
+      console.error(err);
+    }
+  });
+  
+  // realized there's a hint for file size in the directions, 1 character is equal to 1 byte... duh
+  // body is all the html that's printed to console and it can be accessed with length!
+  console.log(`Downloaded and saved ${body.length} bytes to ${filePath}`);
 
 });
 
